@@ -1,0 +1,37 @@
+{
+	"name": "directus-extension-filepreview-interface",
+	"version": "1.0.0",
+	"author": {
+		"name": "seymoe",
+		"email": "seymoe@yeah.net",
+		"url": "https://github.com/seymoe"
+	},
+	"keywords": [
+		"directus",
+		"directus-extension",
+		"directus-custom-interface",
+		"directus-extension-fileppreview",
+		"file-preview"
+	],
+	"directus:extension": {
+		"type": "interface",
+		"path": "index.js",
+		"source": "src/index.js",
+		"host": "^9.8.0"
+	},
+	"scripts": {
+		"build": "directus-extension build",
+		"start": "directus-extension build --watch"
+	},
+	"files": [
+		"index.js",
+		"package.json",
+		"README.md",
+		"LICENSE"
+	],
+	"devDependencies": {
+		"@directus/extensions-sdk": "9.8.0",
+		"vue": "^3.2.31"
+	},
+	"license": "MIT"
+}
