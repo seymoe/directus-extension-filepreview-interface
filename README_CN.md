@@ -1,23 +1,19 @@
-# Icon Card Panel - Directus extension
+# File Preview Interface - Directus extension
 
-A directus panel that show links by icons and text.
+A file freview interface.
 
 ## Installation
 
 In your Directus installation root
 
 ```
-npm install directus-extension-iconcard-panel
+npm install directus-extension-filepreview-interface
 ```
 
 Restart directus
 
 ## Usage
 
-+ Choose **Icon Card** panel
-+ Create new items
-+ Input Static Access Token
-+ Save and enjoy! 🎉
 
 ## Building locally and contributing
 
@@ -29,3 +25,8 @@ npm run build
 ```
 
 Then use `index.js` in your custom `/extensions/panels` directory or in whatever you want.
+
+
+.env 增加配置
+
+CONTENT_SECURITY_POLICY_directives__child-src="'self' blob: https://view.officeapps.live.com"

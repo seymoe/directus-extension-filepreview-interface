@@ -1,8 +1,8 @@
 <template>
 	<div class="file-preview">
-		<video v-if="['video'].includes(previewFileType)" controls :src="src" alt="" role="presentation" />
-    <iframe v-if="['doc', 'ppt'].includes(previewFileType)" :src="`http://view.officeapps.live.com/op/view.aspx?src=${src}`" frameborder="0"></iframe>
-    <iframe v-if="['pdf'].includes(previewFileType)" :src="src" frameborder="0"></iframe>
+		<video v-if="['video'].includes(previewFileType.type)" controls :src="src" alt="" role="presentation" />
+    <iframe v-if="['doc', 'ppt'].includes(previewFileType.type)" :src="`https://view.officeapps.live.com/op/view.aspx?src=${src}`" frameborder="0"></iframe>
+    <iframe v-if="['pdf'].includes(previewFileType.type)" :src="src" frameborder="0"></iframe>
 	</div>
 </template>
 
@@ -48,7 +48,6 @@ export default defineComponent({
 	emits: ['input'],
 	setup(props, { emit }) {
     const api = useApi()
-    console.log(api)
 		const file = ref(null);
     const values = inject('values')
 
@@ -56,30 +55,39 @@ export default defineComponent({
 
 		const src = computed(() => {
 			if (!file.value) return null;
-
-			if (previewFileType) {
-				return addTokenToURL( previewFileType === 'video' ? '' : window.location.origin +  getRootPath() + `assets/${file.value.id}`, props.assetsToken);
+			if (previewFileType.value.type) {
+				return addTokenToURL((previewFileType.value.type === 'video' ? '' : window.location.origin) + getRootPath() + `assets/${file.value.id}.${previewFileType.value.stuff}`, props.assetsToken);
 			}
 			return null;
 		});
 
     const previewFileType = computed(() => {
-      if (!file.value) return null
+      let type = ''
+      let stuff = ''
+      if (!file.value) return {
+        type,
+        stuff
+      }
       let fileName = file.value.filename_download
       let len = fileName.length
       if (fileName.indexOf('.mp4') === len - 4) {
-        return 'video'
+        type = 'video'
       }
       if (fileName.indexOf('.doc') === len - 4 || fileName.indexOf('.docx') === len - 5) {
-        return 'doc'
+        type = 'doc'
       }
       if (fileName.indexOf('.ppt') === len - 4 || fileName.indexOf('.pptx') === len - 5) {
-        return 'ppt'
+        type = 'ppt'
       }
       if (fileName.indexOf('.pdf') === len - 4) {
-        return 'pdf'
+        type = 'pdf'
       }
-      return null
+      let arr = fileName.split('.')
+      stuff = arr[arr.length - 1] || ''
+      return {
+        type,
+        stuff
+      }
     })
 
 		watch(
