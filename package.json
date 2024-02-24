@@ -1,6 +1,14 @@
 {
 	"name": "directus-extension-filepreview-interface",
-	"version": "1.0.1",
+	"version": "1.0.2",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seymoe/directus-extension-filepreview-interface.git"
+  },
+  "bugs": {
+    "url": "https://github.com/seymoe/directus-extension-filepreview-interface/issues"
+  },
+  "homepage": "https://github.com/seymoe/directus-extension-filepreview-interface#readme",
 	"author": {
 		"name": "seymoe",
 		"email": "seymoe@yeah.net",
